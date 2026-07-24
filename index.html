@@ -3,117 +3,644 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Hammad - Portfolio</title>
+  <title>Muhammad Hammad | CRM & Automation Specialist</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
-    /* Reset & Base Layout */
+    /* CSS Reset & Variables */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg-dark: #070d19;
+      --bg-card: #0f172a;
+      --bg-card-hover: #1e293b;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent: #60a5fa;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
     }
 
     body {
-      background-color: #0b132b; /* Dark background */
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* Hero Section Container (Centering Everything) */
-    .hero-container {
-      max-width: 700px;
+    /* Navigation Bar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
+      background: rgba(7, 13, 25, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-btn {
+      background-color: var(--primary);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 20px;
+      transition: background 0.3s ease !important;
+    }
+
+    .nav-btn:hover {
+      background-color: var(--primary-hover) !important;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 60px;
+      background: radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.15), transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 800px;
       text-align: center;
-      margin: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
-    /* Fixed Profile Image Styling */
-    .profile-img {
-      width: 180px !important;
-      height: 180px !important;
-      max-width: 180px;
-      max-height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #3b82f6;
-      box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    /* Content Styling */
-    .hero-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .hero-subtitle {
-      font-size: 1.3rem;
-      color: #60a5fa;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-
-    .hero-description {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #d1d5db;
+    /* Profile Image Container */
+    .profile-wrapper {
+      position: relative;
       margin-bottom: 25px;
     }
 
-    /* Buttons */
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary);
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.5);
+      background-color: var(--bg-card);
+      display: block;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #22c55e;
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin-bottom: 35px;
+    }
+
     .btn-group {
       display: flex;
-      gap: 15px;
+      gap: 16px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .btn {
-      padding: 12px 30px;
-      font-size: 0.95rem;
+      padding: 12px 32px;
+      border-radius: 30px;
       font-weight: 600;
-      border-radius: 25px;
       text-decoration: none;
-      color: #ffffff;
-      background-color: #2563eb;
+      font-size: 1rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .btn:hover {
-      background-color: #1d4ed8;
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
       transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-card-hover);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Section Global Styles */
+    section {
+      padding: 90px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      background-color: var(--bg-card-hover);
+    }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s ease;
+    }
+
+    .skill-card i {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .skill-card:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+
+    /* About Section */
+    .about-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text h3 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-box {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .form-group {
+      display: flex;
+      gap: 16px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="hero-container">
-    <!-- Image Profile -->
-    <img src="profile.jpg" alt="Muhammad Hammad" class="profile-img">
-
-    <!-- Content -->
-    <h1 class="hero-title">Hi, I'm Muhammad Hammad</h1>
-    <h2 class="hero-subtitle">CRM & Automation Specialist</h2>
-    <p class="hero-description">
-      Helping businesses streamline workflows with Housecall Pro, ServiceTitan, Zoho CRM, Data Migration & API Integrations.
-    </p>
-
-    <!-- Buttons -->
-    <div class="btn-group">
-      <a href="#hire" class="btn">Hire Me</a>
-      <a href="#contact" class="btn">Contact Me</a>
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">M. <span>Hammad</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact" class="nav-btn">Get In Touch</a></li>
+      </ul>
     </div>
-  </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      
+      <div class="profile-wrapper">
+        <img src="profile.jpg" alt="Muhammad Hammad" class="profile-img" onerror="this.src='https://via.placeholder.com/180/0f172a/3b82f6?text=M.+Hammad'">
+      </div>
+
+      <div class="badge">
+        <span class="badge-dot"></span> Available for New Projects
+      </div>
+
+      <h1 class="hero-title">Hi, I'm Muhammad Hammad</h1>
+      <h2 class="hero-subtitle">CRM & Automation Specialist</h2>
+      
+      <p class="hero-description">
+        I help field service businesses & growing enterprises streamline operations, migrate data seamlessly, and build powerful API automations using Housecall Pro, ServiceTitan, and Zoho CRM.
+      </p>
+
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Hire Me</a>
+        <a href="#services" class="btn btn-secondary"><i class="fa-solid fa-sliders"></i> Explore Services</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-header">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">Delivering Efficiency Through Automation & Smart Systems</p>
+    </div>
+
+    <div class="about-content">
+      <div class="about-text">
+        <h3>Optimizing Workflows for Business Growth</h3>
+        <p>
+          With expertise in industry-leading CRM platforms like <strong>Housecall Pro, ServiceTitan, and Zoho CRM</strong>, I specialize in eliminating manual data entry and optimizing workflow logic.
+        </p>
+        <p>
+          Whether you need a full CRM setup, custom API integrations via Zapier/Make, or complex data migration, I ensure your business software works for you—not against you.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Automation Accuracy</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">CRM</div>
+          <div class="stat-label">Specialist</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">APIs</div>
+          <div class="stat-label">Custom Integrations</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">System Reliability</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <div class="section-header">
+      <h2 class="section-title">Core Services</h2>
+      <p class="section-subtitle">Tailored CRM & Automation Solutions For Your Business</p>
+    </div>
+
+    <div class="services-grid">
+      
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <h3>Housecall Pro Setup</h3>
+        <p>Full account configuration, customer imports, price book setups, and job dispatching workflow optimization.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <h3>ServiceTitan Management</h3>
+        <p>Custom booking flows, reporting dashboards, tracking integrations, and field technician app optimization.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <h3>Zoho CRM Customization</h3>
+        <p>Blueprint design, custom module creation, sales pipelines, and automated email/SMS customer journeys.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-database"></i></div>
+        <h3>Data Migration</h3>
+        <p>Clean, lossless data transfer between CRMs without downtime or duplicate entries.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-code-branch"></i></div>
+        <h3>API & Webhook Integrations</h3>
+        <p>Connecting your CRM with third-party apps, accounting software, and payment gateways using custom APIs or Zapier.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3>Workflow Automation</h3>
+        <p>Eliminating manual tasks with automated triggers, instant notifications, and automated invoicing.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="section-header">
+      <h2 class="section-title">Tools & Expertise</h2>
+      <p class="section-subtitle">Platforms and Technologies I Work With Daily</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <i class="fa-solid fa-briefcase"></i>
+        <span>Housecall Pro</span>
+      </div>
+      <div class="skill-card">
+        <i class="fa-solid fa-gears"></i>
+        <span>ServiceTitan</span>
+      </div>
+      <div class="skill-card">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Zoho CRM</span>
+      </div>
+      <div class="skill-card">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Zapier / Make</span>
+      </div>
+      <div class="skill-card">
+        <i class="fa-solid fa-network-wired"></i>
+        <span>REST APIs</span>
+      </div>
+      <div class="skill-card">
+        <i class="fa-solid fa-file-csv"></i>
+        <span>Data Cleaning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-container">
+      <h2 class="section-title">Let's Work Together</h2>
+      <p class="section-subtitle">Ready to automate your workflows and upgrade your CRM?</p>
+
+      <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Your message has been submitted.');">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Your Name" required>
+          <input type="email" class="form-control" placeholder="Your Email" required>
+        </div>
+        <input type="text" class="form-control" placeholder="Subject / Required Service">
+        <textarea class="form-control" placeholder="Tell me about your project or CRM requirements..."></textarea>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer;">
+          Send Message <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Muhammad Hammad. All Rights Reserved. | CRM & Automation Specialist</p>
+  </footer>
 
 </body>
 </html>
+```eof
+
+---
+
+### Aapko ab kya karna hai (Simple Steps):
+
+1. **GitHub Repository** mein jaakar `index.html` file open karein.
+2. Upar **✏️ Edit (pencil icon)** par click karein.
+3. Pehle waala poora code **Delete** kar dein.
+4. Upar diya gaya **Ye Poora Code Copy Karke Paste Kar Din**.
+5. Neeche **Commit changes** par click kar dein.
+
+**Aapki website bilkul ready ho jayegi!** Isme image ka round/glowing size, "Hire Me" aur "Contact Me" buttons, About section, Services, Skills aur Contact Form sab kuch ek dam professional lagay ga.
